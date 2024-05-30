@@ -64,7 +64,8 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 1, 2, 0, 2, 3 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
-        normal = new List<Vector3> { Vector3.back, Vector3.back, Vector3.back, Vector3.back };
+        var n = new List<Vector3> {Vector3.back, Vector3.back, Vector3.back, Vector3.back };
+        normal.AddRange(n);
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
@@ -78,7 +79,8 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 3, 2, 0, 2, 1 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
-        normal = new List<Vector3> { Vector3.forward, Vector3.forward, Vector3.forward, Vector3.forward };
+        var n = new List<Vector3> { Vector3.forward, Vector3.forward, Vector3.forward, Vector3.forward };
+        normal.AddRange(n);
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
@@ -92,7 +94,8 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 1, 2, 0, 2, 3 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
-        normal = new List<Vector3> { Vector3.left, Vector3.left, Vector3.left, Vector3.left };
+        var n = new List<Vector3> { Vector3.left, Vector3.left, Vector3.left, Vector3.left };
+        normal.AddRange(n);
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
@@ -106,7 +109,8 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 3, 2, 0, 2, 1 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
-        normal = new List<Vector3> { Vector3.right, Vector3.right, Vector3.right, Vector3.right };
+        var n = new List<Vector3> { Vector3.right, Vector3.right, Vector3.right, Vector3.right };
+        normal.AddRange(n);
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
@@ -120,7 +124,8 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 1, 3, 1, 2, 3 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
-        normal = new List<Vector3> { Vector3.down, Vector3.down, Vector3.down, Vector3.down };
+        var n = new List<Vector3> { Vector3.down, Vector3.down, Vector3.down, Vector3.down };
+        normal.AddRange(n);
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
@@ -134,7 +139,8 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 3, 2, 0, 2, 1 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
-        normal = new List<Vector3> { Vector3.up, Vector3.up, Vector3.up, Vector3.up };
+        var n = new List<Vector3> { Vector3.up, Vector3.up, Vector3.up, Vector3.up };
+        normal.AddRange(n);
         return new Vector3[] { p1, p2, p3, p4 };
     }
 }
