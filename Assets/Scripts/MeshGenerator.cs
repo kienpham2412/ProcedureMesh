@@ -34,14 +34,16 @@ public class MeshGenerator : MonoBehaviour
 
         var listVerts = new List<Vector3>();
         var listTrisIndices = new List<int>();
-        listVerts.AddRange(CreateBackFace(0, ref listTrisIndices));
-        listVerts.AddRange(CreateFrontFace(1, ref listTrisIndices));
-        listVerts.AddRange(CreateLeftFace(2, ref listTrisIndices));
-        listVerts.AddRange(CreateRightFace(3, ref listTrisIndices));
-        listVerts.AddRange(CreateBelowFace(4, ref listTrisIndices));
-        listVerts.AddRange(CreateAboveFace(5, ref listTrisIndices));
+        var listNormal = new List<Vector3>();
+        listVerts.AddRange(CreateBackFace(0, ref listTrisIndices, ref listNormal));
+        listVerts.AddRange(CreateFrontFace(1, ref listTrisIndices, ref listNormal));
+        listVerts.AddRange(CreateLeftFace(2, ref listTrisIndices, ref listNormal));
+        listVerts.AddRange(CreateRightFace(3, ref listTrisIndices, ref listNormal));
+        listVerts.AddRange(CreateBelowFace(4, ref listTrisIndices, ref listNormal));
+        listVerts.AddRange(CreateAboveFace(5, ref listTrisIndices, ref listNormal));
         mesh.vertices = listVerts.ToArray();
         mesh.triangles = listTrisIndices.ToArray();
+        mesh.normals = listNormal.ToArray();
         return mesh;
     }
 
@@ -52,7 +54,7 @@ public class MeshGenerator : MonoBehaviour
         return localIndices;
     }
 
-    private Vector3[] CreateBackFace(int order, ref List<int> tris)
+    private Vector3[] CreateBackFace(int order, ref List<int> tris, ref List<Vector3> normal)
     {
         var p1 = new Vector3(-0.5f, 0.5f, -0.5f);
         var p2 = new Vector3(0.5f, 0.5f, -0.5f);
@@ -62,10 +64,11 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 1, 2, 0, 2, 3 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
+        normal = new List<Vector3> { Vector3.back, Vector3.back, Vector3.back, Vector3.back };
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
-    private Vector3[] CreateFrontFace(int order, ref List<int> tris)
+    private Vector3[] CreateFrontFace(int order, ref List<int> tris, ref List<Vector3> normal)
     {
         var p1 = new Vector3(-0.5f, 0.5f, 0.5f);
         var p2 = new Vector3(0.5f, 0.5f, 0.5f);
@@ -75,10 +78,11 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 3, 2, 0, 2, 1 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
+        normal = new List<Vector3> { Vector3.forward, Vector3.forward, Vector3.forward, Vector3.forward };
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
-    private Vector3[] CreateLeftFace(int order, ref List<int> tris)
+    private Vector3[] CreateLeftFace(int order, ref List<int> tris, ref List<Vector3> normal)
     {
         var p1 = new Vector3(-0.5f, 0.5f, 0.5f);
         var p2 = new Vector3(-0.5f, 0.5f, -0.5f);
@@ -88,10 +92,11 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 1, 2, 0, 2, 3 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
+        normal = new List<Vector3> { Vector3.left, Vector3.left, Vector3.left, Vector3.left };
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
-    private Vector3[] CreateRightFace(int order, ref List<int> tris)
+    private Vector3[] CreateRightFace(int order, ref List<int> tris, ref List<Vector3> normal)
     {
         var p1 = new Vector3(0.5f, 0.5f, 0.5f);
         var p2 = new Vector3(0.5f, 0.5f, -0.5f);
@@ -101,10 +106,11 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 3, 2, 0, 2, 1 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
+        normal = new List<Vector3> { Vector3.right, Vector3.right, Vector3.right, Vector3.right };
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
-    private Vector3[] CreateBelowFace(int order, ref List<int> tris)
+    private Vector3[] CreateBelowFace(int order, ref List<int> tris, ref List<Vector3> normal)
     {
         var p1 = new Vector3(-0.5f, -0.5f, -0.5f);
         var p2 = new Vector3(0.5f, -0.5f, -0.5f);
@@ -114,10 +120,11 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 1, 3, 1, 2, 3 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
+        normal = new List<Vector3> { Vector3.down, Vector3.down, Vector3.down, Vector3.down };
         return new Vector3[] { p1, p2, p3, p4 };
     }
 
-    private Vector3[] CreateAboveFace(int order, ref List<int> tris)
+    private Vector3[] CreateAboveFace(int order, ref List<int> tris, ref List<Vector3> normal)
     {
         var p1 = new Vector3(-0.5f, 0.5f, -0.5f);
         var p2 = new Vector3(0.5f, 0.5f, -0.5f);
@@ -127,6 +134,7 @@ public class MeshGenerator : MonoBehaviour
         var indices = new int[] { 0, 3, 2, 0, 2, 1 };
         indices = CalculateTrisIndices(order, indices);
         tris.AddRange(indices);
+        normal = new List<Vector3> { Vector3.up, Vector3.up, Vector3.up, Vector3.up };
         return new Vector3[] { p1, p2, p3, p4 };
     }
 }
